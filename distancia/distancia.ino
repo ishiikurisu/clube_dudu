@@ -1,7 +1,8 @@
 #define ECHO 3
-#define TRIGGER 4
-#define LED 5
-#define ALLOWED (5.0)
+#define TRIGGER 12
+#define FEED 11
+#define LED 13
+#define ALLOWED (10.0)
 
 /* CALCULATIONS */
 
@@ -21,6 +22,7 @@ float get_distance (int trigger, int echo)
 void alert(bool what)
 {
     digitalWrite(LED, what);
+    digitalWrite(FEED, HIGH);
 }
 
 /* MAIN PROCEDURES */
@@ -29,17 +31,12 @@ void setup()
     pinMode(ECHO, INPUT);
     pinMode(TRIGGER, OUTPUT);
     pinMode(LED, OUTPUT);
-    Serial.begin(9600);
+    pinMode(FEED, OUTPUT);
 }
 
 void loop()
 {
     float distance = get_distance(TRIGGER, ECHO);
     bool result = (distance <= ALLOWED) && (distance > 0);
-
-    Serial.print("Distance: ");
-    Serial.println(distance);
     alert(result);
-
-
 }
