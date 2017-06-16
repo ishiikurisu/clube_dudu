@@ -19,4 +19,5 @@ void loop()
     Serial.print(temperature);
     Serial.print(";");
     Serial.println(light);
+    delay(2000);
 }
